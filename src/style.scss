@@ -1,0 +1,301 @@
+body {
+  // -webkit-transform: scale(1);
+  @media screen and (max-width: 375.2px) {
+    width: 375px;
+  }
+  @media screen and (max-width: 320px) {
+    width: 320px;
+  }
+}
+* {
+  // perfomance?
+  margin: 0;
+  padding: 0;
+}
+
+.main {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    #31333b 13.26%,
+    #363945 74.59%,
+    #2b2d35 100%
+  );
+  @media screen and (max-width: 767.2px) {
+    width: 767px;
+    height: 667px;
+  }
+  @media screen and (max-width: 375.2px) {
+    width: 375px;
+    height: 667px;
+  }
+  @media screen and (max-width: 320px) {
+    width: 320px;
+    height: 568px;
+  }
+}
+.header-added-heroes {
+  display: none;
+  position: relative;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    linear-gradient(180deg, #555761 -51.19%, #2b2d35 100%);
+  height: 168px;
+  @media screen and (max-width: 767.2px) {
+    width: 767px;
+    overflow: hidden;
+  }
+  @media screen and (max-width: 375.2px) {
+    width: 375px;
+    overflow: hidden;
+  }
+  @media screen and (max-width: 320px) {
+    width: 320px;
+    overflow: hidden;
+  }
+}
+.heroes {
+  height: 100px; /* 40px - more place for scrollbar, is hidden under parent box */
+  padding-left: 20px;
+  padding-top: 40px;
+  white-space: nowrap;
+  overflow-x: scroll;
+  overflow-y: hide;
+  -webkit-overflow-scrolling: touch;
+  // width: 375px;
+}
+.hero {
+  position: relative;
+  display: inline-block;
+  width: 72px;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+  background: #ddd;
+  border-radius: 8px;
+  // &:hover~#delete-hero{
+  //   display: block;
+  // }
+}
+// #img:hover + #delete {
+//   display: inline-block;
+// }
+#delete {
+  position: absolute;
+  display: inline-block;
+  right: 0px;
+  line-height: normal;
+  height: 15px;
+}
+.hero + .hero {
+  margin-left: 16px;
+}
+.heroes__link + .heroes__link {
+  margin-left: 16px;
+}
+.hero__counter-icon {
+  position: absolute;
+  left: 4px;
+  bottom: 4px;
+}
+.counter-text {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: normal;
+  color: #ffffff;
+  position: absolute;
+  width: 7px;
+  height: 15px;
+  left: 13px;
+  bottom: 8px;
+}
+.counter-text2 {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: normal;
+  color: #ffffff;
+  position: absolute;
+  width: 7px;
+  height: 15px;
+  left: 8px;
+  bottom: 8px;
+}
+.shadow-last-scroll-hero {
+  position: absolute;
+  width: 46px;
+  height: 144px;
+  left: 282px; // why not right: 0px; ?
+  top: 24px;
+  @media screen and (max-width: 767.2px) {
+    left: 721px;
+  }
+  @media screen and (max-width: 375.2px) {
+    left: 330px;
+  }
+  background: linear-gradient(270deg, #282930 50%, rgba(40, 41, 48, 0) 100%);
+}
+.find-hero-list {
+  position: relative;
+  // @media screen and (max-width: 767px) {
+  // width: 767px;
+  // height: 404px; // }
+  @media screen and (max-width: 767.2px) {
+    width: 767px;
+    height: 499px;
+  }
+  @media screen and (max-width: 375.2px) {
+    // почеум при указании в хроме ширины 375 он ставит 375.2?
+    width: 375px;
+    height: 404px;
+  }
+  @media screen and (max-width: 320px) {
+    width: 320px;
+    // height: 304px;
+    height: 472px;
+  }
+}
+.find-hero-list__list {
+  // change
+  display: grid;
+  overflow-y: scroll;
+  grid-template-columns: repeat(auto-fit, minmax(64px, 64px));
+  // grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
+  // grid-template-rows: 1fr 1fr;
+  grid-auto-rows: 100px;
+  grid-gap: 36px 8px;
+  box-sizing: border-box;
+  position: absolute;
+  top: 100px;
+  width: 320px;
+  height: 204px;
+  padding-left: 20px;
+  padding-right: 20px;
+  @media screen and (max-width: 375.2px) {
+    width: 375px; // height: 403px;
+    height: 296px;
+    grid-gap: 48px 16px;
+    // TODO как лучше сделать?
+    padding-right: 19px;
+  }
+  @media screen and (max-width: 320px) {
+    width: 320px;
+    // height: 204px;
+    height: 372px;
+    grid-gap: 36px 8px;
+    padding-right: 20px;
+  }
+}
+.hero-card {
+  @media screen and (max-width: 375.2px) {
+    width: 72px;
+    height: 124px;
+  }
+  @media screen and (max-width: 320px) {
+    width: 64px;
+    height: 100px;
+  }
+  width: 64px;
+  height: 100px;
+  border-radius: 8px;
+  background: #ddd;
+}
+.search-bar {
+  position: absolute;
+}
+.search-bar__input {
+  position: absolute;
+  box-sizing: border-box;
+  border-width: 0px;
+  // border: none;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: normal;
+  color: #ffffff;
+  height: 56px;
+  top: 16px;
+  padding-left: 14px;
+  &::placeholder {
+    color: white;
+  }
+  @media screen and (max-width: 767.2px) {
+    width: 336px;
+    left: 20px;
+  }
+  @media screen and (max-width: 375.2px) {
+    width: 335px;
+    left: 20px;
+  }
+  @media screen and (max-width: 320px) {
+    width: 288px;
+    left: 16px;
+  }
+  background: #4b4e5c;
+  border-radius: 8px;
+}
+.search-bar__submit-button {
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  top: 33px;
+  left: 264px;
+}
+.footer-universe-selecting {
+  // position: relative;
+  background: #31333d;
+  height: 96px;
+  position: absolute;
+  bottom: 0px;
+  @media screen and (max-width: 767.2px) and (min-width: 375.3px) {
+    position: absolute;
+    top: 177px;
+    left: 432px;
+    width: 276px;
+    height: 75px;
+    background: none;
+  }
+  @media screen and (max-width: 375.2px) {
+    width: 375px;
+  }
+  @media screen and (max-width: 320px) {
+    width: 320px;
+  }
+}
+.footer-universe-selecting__dc-universe {
+  position: absolute;
+  width: 120px;
+  height: 75px;
+  @media screen and (max-width: 767.2px) {
+    // left: 0px;
+  }
+  @media screen and (max-width: 375.2px) {
+    // strange.. in chrome
+    left: 44px;
+    bottom: 11px;
+  }
+  @media screen and (max-width: 320px) {
+    left: 28px;
+    top: 14px;
+  }
+}
+.footer-universe-selecting__marvel-universe {
+  position: absolute;
+  width: 111px;
+  height: 50px;
+  @media screen and (max-width: 767.2px) {
+    top: 10px;
+    right: 0px;
+  }
+  @media screen and (max-width: 375.2px) {
+    right: 55px;
+    bottom: 26px;
+  }
+  @media screen and (max-width: 320px) {
+    right: 40px;
+    top: 24px;
+  }
+}

@@ -2,7 +2,7 @@ const DC_UNIVERSE = 'dc', MARVEL_UNIVERSE = 'marvel';
 
 const initialState = DC_UNIVERSE;
 
-export default function(state = initialState, action) {
+const universe = (state = initialState, action) => {
   switch (action.type) {
     case 'SET_UNIVERSE': {
       return action.payload.universe;
@@ -11,3 +11,5 @@ export default function(state = initialState, action) {
       return state;
   }
 }
+
+export default universe;

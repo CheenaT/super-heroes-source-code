@@ -1,10 +1,15 @@
 import React from "react";
 // import uniqueId from "lodash/uniqueId";
 import HeroCounter from "../../images/HeroCounter.svg";
+import { connect } from 'react-redux';
+import store from '../../redux/store';
 
 class HeaderAddedHeroes extends React.Component {
   state = {
-    heroes: [1, 2, 3, 4],
+    heroes: {
+      allIds: [],
+      byIds: {}
+    },
     showCloseButton: false,
     justTouchedFlag: false
   };
@@ -16,6 +21,26 @@ class HeaderAddedHeroes extends React.Component {
     this.handleMove = this.handleMove.bind(this);
     this.handleMouseOut = this.handleMouseOut.bind(this);
     this.handleMouseOver = this.handleMouseOver.bind(this);
+
+    store.subscribe(() => {
+      // When state will be updated(in our case, when items will be fetched),
+      // we will update local component state and force component to rerender
+      // with new data.
+      let header = document.querySelector('.header-added-heroes');
+const listField = document.querySelector('.find-hero-list');
+const list = document.querySelector('.find-hero-list__list');
+console.log(header.style.display);
+// getComputedStyle(els[0], "").display === "none"
+if ( getComputedStyle(header).display == 'none' ) {
+  header.style.display = 'block';
+  listField.style.height = '304px';
+  list.style.height = '204px';
+}
+      console.log(' from subscribe : ', store.getState().addedHeroes, this.state.heroes)
+      this.setState({
+        heroes: store.getState().addedHeroes
+      });
+    });
   }
 
   handleMove() {
@@ -45,9 +70,12 @@ class HeaderAddedHeroes extends React.Component {
     return (
       <header className="header-added-heroes">
         <div className="shadow-last-scroll-hero" />
+        { console.log(' from render : ', this.state.heroes)}
         <div className="heroes">
-          {this.props.addedHeroes.map( (el) => {
-            return (<a name={el.link} key={el.name} className="heroes__link">
+          {Object.keys(this.state.heroes['byIds']).map( (key) => {
+            const el = this.state.heroes['byIds'][key].content;
+            const counter = this.state.heroes['byIds'][key].counter;
+            return (<a name={el.name} key={el.name} className="heroes__link">
               <div className="hero">
                 {
                   <img className="hero__image"
@@ -66,15 +94,15 @@ class HeaderAddedHeroes extends React.Component {
                     }}
                   />
                 }
-                {el.counter >= 2 && (
+                {counter >= 2 && (
                   <React.Fragment>
                     <img
                       src={HeroCounter}
                       alt=""
                       className="hero__counter-icon"
                     />
-                    { el.counter >= 10 && <div className="counter-text2">{el.counter}</div> } {/* TODO // OPTIMIZE: */}
-                    { el.counter < 10 && <div className="counter-text">{el.counter}</div> }
+                    { counter >= 10 && <div className="counter-text2">{counter}</div> } {/* TODO // OPTIMIZE: */}
+                    { counter < 10 && <div className="counter-text">{counter}</div> }
                   </React.Fragment>
                 )}
                 { console.log(this.state.showCloseButton) }

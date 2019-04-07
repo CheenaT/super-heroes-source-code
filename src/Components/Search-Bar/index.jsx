@@ -1,8 +1,6 @@
 import React from "react";
 import { ReactComponent as CircleIcon } from "../../images/Ellipse.svg";
 import { ReactComponent as RectangleIcon } from "../../images/Rectangle.svg";
-import { connect } from 'react-redux';
-import { setUniverse } from '../../redux/actions';
 
 class SearchBar extends React.Component {
   render() {

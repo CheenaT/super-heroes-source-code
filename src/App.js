@@ -4,9 +4,6 @@ import Footer from './Components/Footer';
 import FindHeroList from './Components/Find-Hero-List';
 import HeaderAddedHeroes from './Components/Header-Added-Heroes';
 
-import { Provider } from 'react-redux';
-import store from "./redux/store";
-
 class App extends Component {
   state = {
     addedHeroes: [],
@@ -66,7 +63,6 @@ class App extends Component {
   }
   render() {
     return (
-      <Provider store={store}>
         <div className="main"> {console.log('this.state.filterValue', this.state.filterValue)}
           <HeaderAddedHeroes addedHeroes={this.state.addedHeroes} focusEl={this.focusEl} />
 
@@ -75,7 +71,6 @@ class App extends Component {
           <Footer onChangeUniverse={this.onChangeUniverse}/>
 
         </div>
-      </Provider>
     );
   }
 }

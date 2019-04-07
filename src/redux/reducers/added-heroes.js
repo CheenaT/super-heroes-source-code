@@ -15,35 +15,53 @@ export default function(state = initialState, action) {
           ...state.byIds,
           [content.name]: {
             content,
-            counter: 1
+            counter: 1,
+            isPressed: false
           }
         }
       };
-    } else {
-        console.log(' state : ', state.byIds[content.name].counter++);
-
+    } else if (state.byIds[content.name].counter < 15) {
+      console.log(" state : ", state.byIds[content.name].counter++); // изменяет
     }
+  } else if (action.type === "HERO_PRESSED_TRUE") {
+    const { content } = action.payload;
+    return {
+      ...state,
+      byIds: {
+        ...state.byIds,
+        [content.name]: {
+          ...state.byIds[content.name],
+          isPressed: true
+        }
+      }
+    };
+  } else if (action.type === "HERO_PRESSED_FALSE") {
+    const { content } = action.payload;
+    return {
+      ...state,
+      byIds: {
+        ...state.byIds,
+        [content.name]: {
+          ...state.byIds[content.name],
+          isPressed: false
+        }
+      }
+    };
+  } else if (action.type === "HERO_DELETE") {
+    const { content } = action.payload;
+    const { allIds, byIds } = state;
+    var ids = allIds.filter(el => ( el !== content.name ) )
+        console.log(' state2 : ', content.name, ids);
+    var heroes = Object.keys(byIds).filter(key => key !== content.name).reduce((result, current) => {
+      result[current] = byIds[current];
+      return result;
+    }, {});
+    return {
+      allIds: ids,
+      byIds: {
+        ...heroes
+      }
+    };
   }
-
   return state;
 }
-
-// export default function(state = initialState, action) {
-//   switch (action.type) {
-//     case "ADD_HERO": {
-//       const { id, content } = action.payload;
-//       return {
-//         ...state,
-//         allIds: [...state.allIds, id],
-//         byIds: {
-//           ...state.byIds,
-//           [id]: {
-//             content
-//           }
-//         }
-//       };
-//     }
-//     default:
-//       return state;
-//   }
-// }

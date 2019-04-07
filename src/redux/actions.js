@@ -7,7 +7,6 @@ export const setUniverse = universe => ({
   }
 });
 
-
 export const addTodo = content => ({
   type: 'ADD_HERO',
   payload: {
@@ -19,4 +18,19 @@ export const addTodo = content => ({
 export const findHero = filterValue => ({
   type: 'FIND_HERO',
   payload: {filterValue}
+});
+
+export const heroPressedTrue = content => ({
+  type: 'HERO_PRESSED_TRUE',
+  payload: { content }
+});
+
+export const heroPressedFalse = content => ({
+  type: 'HERO_PRESSED_FALSE',
+  payload: { content }
+});
+
+export const deleteHero = content => ({
+  type: 'HERO_DELETE',
+  payload: { content }
 });

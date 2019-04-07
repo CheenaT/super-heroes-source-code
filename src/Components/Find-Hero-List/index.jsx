@@ -9,7 +9,7 @@ import { addTodo } from '../../redux/actions';
 
 const FindHeroList = ({ heroes, addTodo }) => {
     return (
-      <div className="find-hero-list">
+      <div className="find-hero-list"> 
         <div className="find-hero-list__search-bar">
           <SearchBar />
         </div>

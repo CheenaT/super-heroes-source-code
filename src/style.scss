@@ -127,13 +127,16 @@ body {
   position: absolute;
   width: 46px;
   height: 144px;
-  left: 282px; // why not right: 0px; ?
   top: 24px;
+  z-index: 1;
   @media screen and (max-width: 767.2px) {
     left: 721px;
   }
   @media screen and (max-width: 375.2px) {
     left: 330px;
+  }
+  @media screen and (max-width: 320px) {
+    left: 282px; // why not right: 0px; ?
   }
   background: linear-gradient(270deg, #282930 50%, rgba(40, 41, 48, 0) 100%);
 }

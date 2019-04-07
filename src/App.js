@@ -14,7 +14,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.focusEl = React.createRef();
-    this.addHeroHandler = this.addHeroHandler.bind(this);
     this.onChangeUniverse = this.onChangeUniverse.bind(this);
     this.onFilterHandler = this.onFilterHandler.bind(this);
   }
@@ -26,32 +25,7 @@ class App extends Component {
     link.href = '/favicons/' + Math.floor(Math.random() * 10 + 1) + 'favicon.ico';
   }
 
-  addHeroHandler = el => () =>  {
-    let header = document.querySelector('.header-added-heroes');
-    const listField = document.querySelector('.find-hero-list');
-    const list = document.querySelector('.find-hero-list__list');
-    console.log(header.style.display);
-    // getComputedStyle(els[0], "").display === "none"
-    if ( getComputedStyle(header).display == 'none' ) {
-      header.style.display = 'block';
-      listField.style.height = '304px';
-      list.style.height = '204px';
-    }
-    console.log(el, ' before : ', this.state.addedHeroes.indexOf(el) );
-    if ( this.state.addedHeroes.indexOf(el) === -1 ) {
-      el.counter = 1; console.log(' el.counter ', el);
-      el.link = el.name;
-      this.setState({addedHeroes: [el, ...this.state.addedHeroes]});
-    }
-    else {
-      let updateAddedHeroes = this.state.addedHeroes;
-      updateAddedHeroes[this.state.addedHeroes.indexOf(el)].counter++;
-      this.setState({addedHeroes: updateAddedHeroes})
 
-    }
-    console.log(el, ' after : ', this.state.addedHeroes);
-    // this.focusEl.current.focus();
-  };
   onChangeUniverse = el => () => {
     this.setState({selectedUnierse: el, filterValue: ''})
   }

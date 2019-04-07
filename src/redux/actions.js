@@ -15,3 +15,8 @@ export const addTodo = content => ({
     content
   }
 });
+
+export const findHero = filterValue => ({
+  type: 'FIND_HERO',
+  payload: {filterValue}
+});

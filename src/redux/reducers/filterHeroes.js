@@ -1,12 +1,12 @@
-const initialState = '';
+const initialState = "";
 
 const filterHeroes = (state = initialState, action) => {
-  if (action.type === 'FIND_HERO') {
-    console.log(' filterValue : ', action.payload.filterValue);
+  if (action.type === "FIND_HERO") {
     return action.payload.filterValue;
+  } else if (action.type === "SET_UNIVERSE") {
+    return "";
   }
-  console.log(' filterValue state', typeof state, state.length);
   return state;
-}
+};
 
 export default filterHeroes;

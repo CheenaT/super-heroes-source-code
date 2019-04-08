@@ -1,11 +1,16 @@
 import React from "react";
-// import uniqueId from "lodash/uniqueId";
 import HeroCounter from "../../images/HeroCounter.svg";
 import { connect } from "react-redux";
 import store from "../../redux/store";
 import EllipseDelete from "../../images/Ellipse-delete.svg";
 import DeleteIcon from "../../images/Vector.svg";
-import { heroPressedTrue, heroPressedFalse, deleteHero } from '../../redux/actions';
+import {
+  heroPressedTrue,
+  heroPressedFalse,
+  deleteHero
+} from "../../redux/actions";
+
+import uniqueId from "lodash/uniqueId";
 
 class HeaderAddedHeroes extends React.Component {
   state = {
@@ -26,27 +31,18 @@ class HeaderAddedHeroes extends React.Component {
     this.handleMouseOver = this.handleMouseOver.bind(this);
 
     store.subscribe(() => {
-      // When state will be updated(in our case, when items will be fetched),
-      // we will update local component state and force component to rerender
-      // with new data.
       let header = document.querySelector(".header-added-heroes");
+      const headerText = document.querySelector(".header-added-heroes__call-to-action-text");
+      const marvelIcon = document.querySelector(".footer-universe-selecting__marvel-universe");
+      const dcIcon = document.querySelector(".footer-universe-selecting__dc-universe");
       const listField = document.querySelector(".find-hero-list");
       const list = document.querySelector(".find-hero-list__list");
-      console.log(header.style.display);
-      // getComputedStyle(els[0], "").display === "none"
-      if (
-        getComputedStyle(header).display == "none" &&
-        store.getState().addedHeroes.allIds.length
-      ) {
-        header.style.display = "block";
-        listField.style.height = "304px";
-        list.style.height = "204px";
+      if( getComputedStyle(headerText).display === 'block' && store.getState().addedHeroes.allIds.length) {
+        headerText.style.display = 'none';
+      } else if (!store.getState().addedHeroes.allIds.length) {
+        headerText.style.display = 'block';
       }
-      console.log(
-        " from subscribe : ",
-        store.getState().addedHeroes,
-        this.state.heroes
-      );
+
       this.setState({
         heroes: store.getState().addedHeroes
       });
@@ -54,16 +50,13 @@ class HeaderAddedHeroes extends React.Component {
   }
 
   handleMove(el) {
-    console.log("moved");
     this.setState({ justTouchedFlag: false, showCloseButton: false });
     this.props.heroPressedFalse(el);
   }
   onTouchStart() {
-    console.log("started");
     this.setState({ justTouchedFlag: true });
   }
   onTouchEnd(el) {
-    console.log("ended el : ", el);
     if (this.state.justTouchedFlag) {
       this.setState({ showCloseButton: true });
       this.props.heroPressedTrue(el);
@@ -83,10 +76,10 @@ class HeaderAddedHeroes extends React.Component {
   render() {
     return (
       <header className="header-added-heroes">
-        {console.log(" from render : ", this.state.heroes)}
         <div className="heroes">
-          <div className="shadow-last-scroll-hero" />
+          <div className="shadow-last-scroll-hero" /> { console.log(' render \n')}
           {Object.keys(this.state.heroes["byIds"]).map(key => {
+            console.log(' heroes : ', this.state.heroes["byIds"][key]);
             const el = this.state.heroes["byIds"][key].content;
             const { counter, isPressed } = this.state.heroes["byIds"][key];
             return (
@@ -126,22 +119,25 @@ class HeaderAddedHeroes extends React.Component {
                       )}
                     </React.Fragment>
                   )}
-                  {console.log(this.state.showCloseButton)}
-                  { isPressed && (
-                    <div id="delete" onTouchEnd={this.props.deleteHero.bind(this, el)}>
+                  {isPressed && (
+                    <div
+                      id="delete"
+                      onTouchEnd={this.props.deleteHero.bind(this, el)}
+                    >
                       <img
                         src={DeleteIcon}
-                        width='8px'
-                        height='8px'
+                        width="8px"
+                        height="8px"
                         style={{
                           position: "absolute",
                           right: "4px",
                           bottom: "7px",
-                          zIndex: '1'
+                          zIndex: "1"
                         }}
                         alt=""
                       />
-                      <img onTouchEnd={() => deleteHero(el)}
+                      <img
+                        onTouchEnd={() => deleteHero(el)}
                         src={EllipseDelete}
                         alt=""
                         width="24"
@@ -164,9 +160,13 @@ class HeaderAddedHeroes extends React.Component {
           {/* for extra space when scrolling to the last hero */}
           {/* <div className="hero" ref={this.props.focusEl}></div> */}
         </div>
+        <div className="header-added-heroes__call-to-action-text">Выберите героя</div>
       </header>
     );
   }
 }
 
-export default connect(null, { heroPressedTrue, heroPressedFalse, deleteHero })(HeaderAddedHeroes);
+export default connect(
+  null,
+  { heroPressedTrue, heroPressedFalse, deleteHero }
+)(HeaderAddedHeroes);

@@ -18,7 +18,7 @@ class SearchBar extends React.Component {
         <input
           className="search-bar__input"
           type="text"
-          value={this.state.inputValue}
+          value={this.props.inputValue}
           onChange={e => this.updateHeroList(e.target.value)}
           placeholder="Hero name"
           aria-label="search-input"
@@ -38,4 +38,8 @@ class SearchBar extends React.Component {
   }
 }
 
-export default connect(null, { findHero })(SearchBar);
+const mapStateToProps = state => {
+  return { inputValue: state.filterHeroes };
+};
+
+export default connect(mapStateToProps, { findHero })(SearchBar);

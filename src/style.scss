@@ -1,5 +1,8 @@
 body {
   // -webkit-transform: scale(1);
+  @media screen and (max-width: ) {
+
+  }
   @media screen and (max-width: 375.2px) {
     width: 375px;
   }
@@ -7,12 +10,31 @@ body {
     width: 320px;
   }
 }
+::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: rgba(0,0,0,0);
+}
+
+::-webkit-scrollbar
+{
+	width: 0px;
+  height: 0px;
+	background-color: rgba(0,0,0,0);
+}
+
+::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: rgba(0,0,0,0);
+}
 * {
   // perfomance?
   margin: 0;
   padding: 0;
 }
-
 .main {
   position: relative;
   background: linear-gradient(
@@ -21,6 +43,11 @@ body {
     #363945 74.59%,
     #2b2d35 100%
   );
+  @media screen and (max-width: 1600px) { // 1600 чтобы не так отвратительно смотрелось выше 767px
+    width: 1600px;
+    height: 900px;
+
+  }
   @media screen and (max-width: 767.2px) {
     width: 767px;
     height: 667px;
@@ -35,7 +62,7 @@ body {
   }
 }
 .header-added-heroes {
-  display: none;
+  display: block;
   position: relative;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
     linear-gradient(180deg, #555761 -51.19%, #2b2d35 100%);
@@ -59,7 +86,8 @@ body {
   padding-top: 40px;
   white-space: nowrap;
   overflow-x: scroll;
-  overflow-y: hide;
+  // overflow-y: hide;
+  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   // width: 375px;
 }
@@ -73,11 +101,11 @@ body {
   background: #ddd;
   border-radius: 8px;
   // &:hover~#delete-hero{
-  //   display: block;
+  // display: block;
   // }
 }
 // #img:hover + #delete {
-//   display: inline-block;
+// display: inline-block;
 // }
 #delete {
   position: absolute;
@@ -120,7 +148,7 @@ body {
   position: absolute;
   width: 7px;
   height: 15px;
-  left: 8px;
+  left: 9px;
   bottom: 8px;
 }
 .shadow-last-scroll-hero {
@@ -129,6 +157,9 @@ body {
   height: 144px;
   top: 24px;
   z-index: 1;
+  @media screen and (max-width: 1600px) {
+    left: 1554px;
+  }
   @media screen and (max-width: 767.2px) {
     left: 721px;
   }
@@ -140,10 +171,35 @@ body {
   }
   background: linear-gradient(270deg, #282930 50%, rgba(40, 41, 48, 0) 100%);
 }
+.header-added-heroes__call-to-action-text {
+  position: absolute;
+  // left: 316px; // def
+  // width: 136px;
+  height: 22px;
+  top: 76px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: normal;
+  text-align: center;
+  color: #4b4e5c;
+  @media screen and (max-width: 1600px) {
+    left: 316px;
+    width: 136px;
+  }
+  @media screen and (max-width: 375.2px) {
+    left: 119.5px;
+    width: 136px;
+  }
+  @media screen and (max-width: 320px) {
+    left: 92px;
+    width: 136px;
+  }
+}
 .find-hero-list {
   position: relative;
-  // @media screen and (max-width: 767px) {
-  // width: 767px;
+  // @media screen and (max-width: 767px) { // width: 767px;
   // height: 404px; // }
   @media screen and (max-width: 767.2px) {
     width: 767px;
@@ -156,16 +212,15 @@ body {
   }
   @media screen and (max-width: 320px) {
     width: 320px;
-    // height: 304px;
-    height: 472px;
+    height: 304px;
+    // height: 472px;
   }
 }
 .find-hero-list__list {
   // change
   display: grid;
   overflow-y: scroll;
-  grid-template-columns: repeat(auto-fit, minmax(64px, 64px));
-  // grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(72px, 72px)); // grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
   // grid-template-rows: 1fr 1fr;
   grid-auto-rows: 100px;
   grid-gap: 36px 8px;
@@ -173,28 +228,43 @@ body {
   position: absolute;
   top: 100px;
   width: 320px;
-  height: 204px;
+  // height: 204px;
   padding-left: 20px;
   padding-right: 20px;
-  @media screen and (max-width: 375.2px) {
-    width: 375px; // height: 403px;
-    height: 296px;
+  @media screen and (max-width: 1600px) {
+    width: 1567px;
     grid-gap: 48px 16px;
-    // TODO как лучше сделать?
+    height: 399px;
+  }
+  @media screen and (max-width: 767.2px) {
+    grid-gap: 48px 16px;
+    width: 767px;
+    height: 399px;
+  }
+  @media screen and (max-width: 375.2px) {
+    grid-template-columns: repeat(auto-fit, minmax(72px, 72px));
+    width: 375px;
+    // height: 403px;
+    height: 296px;
+    grid-gap: 48px 16px; // TODO как лучше сделать?
     padding-right: 19px;
   }
   @media screen and (max-width: 320px) {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(64px, 64px)
+    );
     width: 320px;
-    // height: 204px;
-    height: 372px;
+    height: 204px;
+    // height: 372px;
     grid-gap: 36px 8px;
     padding-right: 20px;
   }
 }
 .hero-card {
-  @media screen and (max-width: 375.2px) {
+  @media screen and (max-width: 1600px) {
     width: 72px;
-    height: 124px;
+    height: 100px;
   }
   @media screen and (max-width: 320px) {
     width: 64px;
@@ -225,6 +295,8 @@ body {
   &::placeholder {
     color: white;
   }
+  width: 336px;
+  left: 20px;
   @media screen and (max-width: 767.2px) {
     width: 336px;
     left: 20px;
@@ -244,8 +316,17 @@ body {
   background-color: transparent;
   border: none;
   position: absolute;
-  top: 33px;
-  left: 264px;
+  top: 33px; // left: 264px;
+  left: 316px;
+  @media screen and (max-width: 767.2px) {
+    left: 316px;
+  }
+  @media screen and (max-width: 375.2px) and (max-width: 375.2px) {
+    left: 316px;
+  }
+  @media screen and (max-width: 320px) {
+    left: 264px;
+  }
 }
 .footer-universe-selecting {
   // position: relative;
@@ -253,7 +334,7 @@ body {
   height: 96px;
   position: absolute;
   bottom: 0px;
-  @media screen and (max-width: 767.2px) and (min-width: 375.3px) {
+  @media screen and (max-width: 1600px) and (min-width: 376px) {
     position: absolute;
     top: 177px;
     left: 432px;
@@ -262,9 +343,15 @@ body {
     background: none;
   }
   @media screen and (max-width: 375.2px) {
+    height: 96px;
+    position: absolute;
+    bottom: 0px;
     width: 375px;
   }
   @media screen and (max-width: 320px) {
+    height: 96px;
+    position: absolute;
+    bottom: 0px;
     width: 320px;
   }
 }
@@ -289,7 +376,9 @@ body {
   position: absolute;
   width: 111px;
   height: 50px;
-  @media screen and (max-width: 767.2px) {
+  visibility: visible;
+  opacity: 0.2;
+  @media screen and (max-width: 1600px) {
     top: 10px;
     right: 0px;
   }

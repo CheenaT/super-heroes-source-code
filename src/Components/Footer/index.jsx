@@ -9,12 +9,12 @@ const Footer = ({ currentUniverse, setUniverse }) => {
       <footer className="footer-universe-selecting">
         <DCLogo
           className="footer-universe-selecting__dc-universe"
-          onTouchStart={() => {setUniverse('dc')}} />{" "}
+          onTouchStart={() => {setUniverse('dc')}} alt="DC icon" />{" "}
         {/* replace to img tag */}
         <img
           className="footer-universe-selecting__marvel-universe"
           src={MarvelIcon}
-          alt=""
+          alt="Marvel icon"
           onTouchStart={() => {setUniverse('marvel')}}
         />
       </footer>

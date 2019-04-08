@@ -4,7 +4,7 @@ const initialState = {
 };
 
 export default function(state = initialState, action) {
-  if (action.type == "ADD_HERO") {
+  if (action.type === "ADD_HERO") {
     const { id, content } = action.payload;
     // content.counter = 1;
     if (state.allIds.indexOf(content.name) === -1) {
@@ -25,37 +25,44 @@ export default function(state = initialState, action) {
     }
   } else if (action.type === "HERO_PRESSED_TRUE") {
     const { content } = action.payload;
+    const { byIds } = state;
+    const copy = Object.assign({}, byIds, {
+      [content.name]: { ...state.byIds[content.name], isPressed: true }
+    });
     return {
-      ...state,
-      byIds: {
-        ...state.byIds,
-        [content.name]: {
-          ...state.byIds[content.name],
-          isPressed: true
-        }
-      }
+      //
+      allIds: state.allIds,
+      byIds: copy
     };
   } else if (action.type === "HERO_PRESSED_FALSE") {
     const { content } = action.payload;
+    const { byIds } = state;
+    const copy = Object.assign({}, byIds, {
+      [content.name]: { ...state.byIds[content.name], isPressed: false }
+    });
     return {
-      ...state,
-      byIds: {
-        ...state.byIds,
-        [content.name]: {
-          ...state.byIds[content.name],
-          isPressed: false
-        }
-      }
+      //
+      allIds: state.allIds,
+      byIds: copy
     };
+    // return {
+    //   //
+    //   allIds: state.allIds,
+    //   byIds: {
+    //     ...state.byIds,
+    //     [content.name]: { ...state.byIds[content.name], isPressed: true }
+    //   }
+    // };
   } else if (action.type === "HERO_DELETE") {
     const { content } = action.payload;
     const { allIds, byIds } = state;
-    var ids = allIds.filter(el => ( el !== content.name ) )
-        console.log(' state2 : ', content.name, ids);
-    var heroes = Object.keys(byIds).filter(key => key !== content.name).reduce((result, current) => {
-      result[current] = byIds[current];
-      return result;
-    }, {});
+    var ids = allIds.filter(el => el !== content.name);
+    var heroes = Object.keys(byIds)
+      .filter(key => key !== content.name)
+      .reduce((result, current) => {
+        result[current] = byIds[current];
+        return result;
+      }, {});
     return {
       allIds: ids,
       byIds: {

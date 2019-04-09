@@ -3,20 +3,25 @@ import { ReactComponent as DCLogo } from "../../images/dc-logo.svg"; // ReactCom
 import MarvelIcon from "../../images/Marvel.svg"; // Error log in folder error logs
 import { connect } from 'react-redux';
 import { setUniverse } from '../../redux/actions';
+import { NavLink } from 'react-router-dom';
 
 const Footer = ({ currentUniverse, setUniverse }) => {
     return (
       <footer className="footer-universe-selecting">
-        <DCLogo
-          className="footer-universe-selecting__dc-universe"
-          onTouchStart={() => {setUniverse('dc')}} alt="DC icon" />{" "}
+        <NavLink to="/dc">
+          <DCLogo
+            className="footer-universe-selecting__dc-universe"
+            onTouchStart={() => {setUniverse('dc')}} alt="DC icon" />
+        </NavLink>{" "}
         {/* replace to img tag */}
-        <img
-          className="footer-universe-selecting__marvel-universe"
-          src={MarvelIcon}
-          alt="Marvel icon"
-          onTouchStart={() => {setUniverse('marvel')}}
-        />
+        <NavLink to="/marvel">
+          <img
+            className="footer-universe-selecting__marvel-universe"
+            src={MarvelIcon}
+            alt="Marvel icon"
+            onTouchStart={() => {setUniverse('marvel')}}
+          />
+        </NavLink>
       </footer>
     );
 };

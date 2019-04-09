@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import Footer from "./Components/Footer";
 import FindHeroList from "./Components/Find-Hero-List";
+import FindHeroListDC from "./Components/Find-Hero-List-DC";
+import FindHeroListMarvel from "./Components/Find-Hero-List-Marvel";
 import HeaderAddedHeroes from "./Components/Header-Added-Heroes";
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 class App extends Component {
 
@@ -13,11 +16,17 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="main">
-        <HeaderAddedHeroes />
-        <FindHeroList />
-        <Footer />
-      </div>
+      <BrowserRouter>
+        <div className="main">
+          <HeaderAddedHeroes />
+          <Switch>
+            <Route exact path="/" component={FindHeroList} />
+            <Route path="/dc" component={FindHeroListDC} />
+            <Route path="/marvel" component={FindHeroListMarvel} />
+          </Switch>
+          <Footer />
+        </div>
+      </BrowserRouter>
     );
   }
 }

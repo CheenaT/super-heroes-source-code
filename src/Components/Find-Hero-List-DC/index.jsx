@@ -2,10 +2,10 @@ import SearchBar from "../Search-Bar";
 import React from "react";
 import uniqueId from "lodash/uniqueId";
 import { connect } from 'react-redux';
-import { getHeroesByUniverse } from '../../redux/selectors';
+import { getHeroesDC } from '../../redux/selectors';
 import { addHero } from '../../redux/actions';
 
-const FindHeroList = ({ heroes, addHero }) => {
+const FindHeroListDC = ({ heroes, addHero }) => {
     return (
       <div className="find-hero-list">
         <div className="find-hero-list__search-bar">
@@ -31,8 +31,8 @@ const FindHeroList = ({ heroes, addHero }) => {
 
 const mapStateToProps = state => {
   const { currentUniverse } = state;
-  const heroes = getHeroesByUniverse(state, currentUniverse);
+  const heroes = getHeroesDC(state);
   return { heroes };
 }
 
-export default connect(mapStateToProps, {addHero} )(FindHeroList);
+export default connect(mapStateToProps, {addHero} )(FindHeroListDC);

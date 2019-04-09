@@ -7,7 +7,7 @@ export const setUniverse = universe => ({
   }
 });
 
-export const addTodo = content => ({
+export const addHero = content => ({
   type: "ADD_HERO",
   payload: {
     id: ++heroId,

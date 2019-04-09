@@ -34,6 +34,14 @@ export default function(state = initialState, action) {
       allIds: state.allIds,
       byIds: copy
     };
+    // return { // этот вариант тоже работал, но с телефона на github pages неправильно (менял местами выбранных героев после нажатия на всех кроме последнего выбранного героя)
+    //   //
+    //   ...state,
+    //   byIds: {
+    //     ...state.byIds,
+    //     [content.name]: { ...state.byIds[content.name], isPressed: true }
+    //   }
+    // };
   } else if (action.type === "HERO_PRESSED_FALSE") {
     const { content } = action.payload;
     const { byIds } = state;

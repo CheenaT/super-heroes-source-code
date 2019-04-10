@@ -20,7 +20,7 @@ class App extends Component {
         <div className="main">
           <HeaderAddedHeroes />
           <Switch>
-            <Route exact path="/" component={FindHeroList} />
+            <Route path="/" component={FindHeroList} />
             <Route path="/dc" component={FindHeroListDC} />
             <Route path="/marvel" component={FindHeroListMarvel} />
           </Switch>

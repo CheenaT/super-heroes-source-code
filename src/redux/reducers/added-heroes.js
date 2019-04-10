@@ -6,7 +6,6 @@ const initialState = {
 export default function(state = initialState, action) {
   if (action.type === "ADD_HERO") {
     const { content } = action.payload;
-    // content.counter = 1;
     if (state.allIds.indexOf(content.name) === -1) {
       return {
         ...state,
@@ -21,7 +20,7 @@ export default function(state = initialState, action) {
         }
       };
     } else if (state.byIds[content.name].counter < 15) {
-      console.log(" state : ", state.byIds[content.name].counter++); // изменяет
+      console.log(" state : ", state.byIds[content.name].counter++); // изменяет счётчик
     }
   } else if (action.type === "HERO_PRESSED_TRUE") {
     const { content } = action.payload;

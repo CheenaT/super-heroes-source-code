@@ -1,5 +1,4 @@
 body {
-  // -webkit-transform: scale(1);
   @media screen and (max-width: ) {
 
   }
@@ -9,6 +8,9 @@ body {
   @media screen and (max-width: 320px) {
     width: 320px;
   }
+}
+a:hover, a:visited, a:link, a:active {
+    text-decoration: none;
 }
 ::-webkit-scrollbar-track
 {
@@ -100,13 +102,24 @@ body {
   text-align: center;
   background: #ddd;
   border-radius: 8px;
-  // &:hover :first-child{
-  //   display: inline-block;
-  //   position: absolute;
-  //   right: 20px;
-  //   line-height: normal;
-  //   height: 15px;
-  // }
+
+}
+.hero-name {
+  // position: absolute;
+  height: 15px;
+  // left: 0px;
+  // right: 0px;
+  // top: 105px;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: normal;
+  text-align: center;
+
+  color: #FFFFFF;
+
 }
 div.hero:hover span:first-child{
   display: none;
@@ -116,9 +129,7 @@ div.hero:hover span:first-child{
   height: 20px;
   background: cyan;
 }
-// #img:hover + #delete {
-// display: inline-block;
-// }
+
 #delete {
   display: none;
   position: absolute;
@@ -232,8 +243,7 @@ div.hero:hover span:first-child{
   // change
   display: grid;
   overflow-y: scroll;
-  grid-template-columns: repeat(auto-fit, minmax(72px, 72px)); // grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
-  // grid-template-rows: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(72px, 72px));
   grid-auto-rows: 100px;
   grid-gap: 36px 8px;
   box-sizing: border-box;
@@ -377,7 +387,7 @@ div.hero:hover span:first-child{
   @media screen and (max-width: 375.2px) {
     // strange.. in chrome
     left: 44px;
-    bottom: 11px;
+    top: 0px;
   }
   @media screen and (max-width: 320px) {
     left: 28px;

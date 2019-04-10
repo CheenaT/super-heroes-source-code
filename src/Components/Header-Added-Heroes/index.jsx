@@ -18,7 +18,7 @@ class HeaderAddedHeroes extends React.Component {
     },
     justTouchedFlag: false,
     MouseOverFlag: false,
-    screenWidth: window.screen.width > 767 ? true : false,
+    screenWidth: window.screen.width > 767 ? true : false
   };
   constructor(props) {
     super(props);
@@ -32,11 +32,16 @@ class HeaderAddedHeroes extends React.Component {
     this.handleMouseOutCB = this.handleMouseOutCB.bind(this);
 
     store.subscribe(() => {
-      const headerText = document.querySelector(".header-added-heroes__call-to-action-text");
-      if( getComputedStyle(headerText).display === 'block' && store.getState().addedHeroes.allIds.length) {
-        headerText.style.display = 'none';
+      const headerText = document.querySelector(
+        ".header-added-heroes__call-to-action-text"
+      );
+      if (
+        getComputedStyle(headerText).display === "block" &&
+        store.getState().addedHeroes.allIds.length
+      ) {
+        headerText.style.display = "none";
       } else if (!store.getState().addedHeroes.allIds.length) {
-        headerText.style.display = 'block';
+        headerText.style.display = "block";
       }
 
       this.setState({
@@ -52,7 +57,8 @@ class HeaderAddedHeroes extends React.Component {
   onTouchStart() {
     this.setState({ justTouchedFlag: true });
   }
-  onTouchEnd(el) {
+  onTouchEnd(event, el) {
+    event.preventDefault();
     if (this.state.justTouchedFlag) {
       this.props.heroPressedTrue(el);
     } else {
@@ -60,11 +66,11 @@ class HeaderAddedHeroes extends React.Component {
     }
   }
   handleMouseOut(el) {
-    setTimeout( () => {
-      if (this.state.MouseOverFlag) {
+    setTimeout(() => {
+      if (this.state.MouseOverFlag || this.state.justTouchedFlag) {
         this.props.heroPressedFalse(el);
       }
-    }, 0)
+    }, 0);
   }
   handleMouseOver(el) {
     this.setState({
@@ -73,7 +79,7 @@ class HeaderAddedHeroes extends React.Component {
     this.props.heroPressedTrue(el);
   }
   handleMouseOverCB() {
-    this.setState({ MouseOverFlag: false});
+    this.setState({ MouseOverFlag: false });
   }
   handleMouseOutCB(el) {
     this.props.heroPressedFalse(el);
@@ -82,21 +88,23 @@ class HeaderAddedHeroes extends React.Component {
     return (
       <header className="header-added-heroes">
         <div className="heroes">
-          <div className="shadow-last-scroll-hero" /> { console.log(' render \n')}
+          <div className="shadow-last-scroll-hero" />{" "}
           {Object.keys(this.state.heroes["byIds"]).map(key => {
-            console.log(' heroes : ', this.state.heroes["byIds"][key]);
             const el = this.state.heroes["byIds"][key].content;
             const { counter, isPressed } = this.state.heroes["byIds"][key];
             return (
               <a name={el.name} key={el.name} className="heroes__link">
                 <div className="hero">
-                { console.log((isPressed || window.screen.width > 767 ), window.screen.width)}
-                { (isPressed) && (
-                  <div className="delete-button" style={{display: "block",
-                  position: "absolute",
-                  right: "0px",
-                  lineHeight: "normal",
-                  height: "15px"}}
+                {isPressed && (
+                  <div
+                    className="delete-button"
+                    style={{
+                      display: "block",
+                      position: "absolute",
+                      right: "0px",
+                      lineHeight: "normal",
+                      height: "15px"
+                    }}
                     id="delete"
                     onMouseOver={this.handleMouseOverCB}
                     onMouseOut={this.handleMouseOutCB.bind(this, el)}
@@ -116,7 +124,6 @@ class HeaderAddedHeroes extends React.Component {
                       alt=""
                     />
                     <img
-                      onTouchEnd={() => deleteHero(el)}
                       src={EllipseDelete}
                       alt=""
                       width="24"
@@ -133,7 +140,7 @@ class HeaderAddedHeroes extends React.Component {
                       className="hero__image"
                       onTouchStart={this.onTouchStart.bind(this, el)}
                       onTouchMove={this.handleMove.bind(this, el)}
-                      onTouchEnd={this.onTouchEnd.bind(this, el)}
+                      onTouchEnd={(e) => {this.onTouchEnd(e, el)}}
                       onMouseOver={this.handleMouseOver.bind(this, el)}
                       onMouseOut={this.handleMouseOut.bind(this, el)}
                       src={el.image}
@@ -162,7 +169,6 @@ class HeaderAddedHeroes extends React.Component {
                       )}
                     </React.Fragment>
                   )}
-
                 </div>
               </a>
             );
@@ -174,7 +180,9 @@ class HeaderAddedHeroes extends React.Component {
           {/* for extra space when scrolling to the last hero */}
           {/* <div className="hero" ref={this.props.focusEl}></div> */}
         </div>
-        <div className="header-added-heroes__call-to-action-text">Выберите героя</div>
+        <div className="header-added-heroes__call-to-action-text">
+          Выберите героя
+        </div>
       </header>
     );
   }

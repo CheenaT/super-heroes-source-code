@@ -43,7 +43,7 @@ export const heroes = {
       "image": "http://www.ramrus.ru/pic/marvel/captainamerica.jpg"
     },
     {
-      "name": "Сорвиголова",
+      "name": "Дардевил",
       "image": "http://www.ramrus.ru/pic/marvel/daredevil.jpg"
     },
     {

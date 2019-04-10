@@ -30,6 +30,7 @@ class HeaderAddedHeroes extends React.Component {
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.handleMouseOverCB = this.handleMouseOverCB.bind(this);
     this.handleMouseOutCB = this.handleMouseOutCB.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
 
     store.subscribe(() => {
       const headerText = document.querySelector(
@@ -43,13 +44,26 @@ class HeaderAddedHeroes extends React.Component {
       } else if (!store.getState().addedHeroes.allIds.length) {
         headerText.style.display = "block";
       }
-
       this.setState({
         heroes: store.getState().addedHeroes
       });
     });
   }
-
+  componentDidMount() {
+    document.addEventListener('click', this.handleClickOutside);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('click', this.handleClickOutside);
+  }
+  handleClickOutside() {
+    if (store.getState().addedHeroes.allIds.length) {
+      const copy = Object.assign({}, this.state.heroes);
+      for( var i in copy.byIds) {
+        copy.byIds[i].isPressed = false;
+      }
+      this.setState({ heroes: copy})
+    }
+  }
   handleMove(el) {
     this.setState({ justTouchedFlag: false });
     this.props.heroPressedFalse(el);
@@ -108,9 +122,10 @@ class HeaderAddedHeroes extends React.Component {
                     id="delete"
                     onMouseOver={this.handleMouseOverCB}
                     onMouseOut={this.handleMouseOutCB.bind(this, el)}
-                    onTouchEnd={this.props.deleteHero.bind(this, el)}
-                    onClick={this.props.deleteHero.bind(this, el)}
+                    onTouchEnd={(e) => {this.props.deleteHero(e, el)}}
+                    onClick={(e) => {this.props.deleteHero(e, el)}}
                   >
+                  {/* onClick={this.props.deleteHero.bind(this, el)} */}
                     <img
                       src={DeleteIcon}
                       width="8px"

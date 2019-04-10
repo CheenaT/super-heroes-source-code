@@ -20,7 +20,7 @@ class SearchBar extends React.Component {
           type="text"
           value={this.props.inputValue}
           onChange={e => this.updateHeroList(e.target.value)}
-          placeholder="Hero name"
+          placeholder="Имя героя"
           aria-label="search-input"
         />
         <button

@@ -100,16 +100,28 @@ body {
   text-align: center;
   background: #ddd;
   border-radius: 8px;
-  // &:hover~#delete-hero{
-  // display: block;
+  // &:hover :first-child{
+  //   display: inline-block;
+  //   position: absolute;
+  //   right: 20px;
+  //   line-height: normal;
+  //   height: 15px;
   // }
+}
+div.hero:hover span:first-child{
+  display: none;
+}
+.span:hover :first-child {
+  width: 20px;
+  height: 20px;
+  background: cyan;
 }
 // #img:hover + #delete {
 // display: inline-block;
 // }
 #delete {
+  display: none;
   position: absolute;
-  display: inline-block;
   right: 0px;
   line-height: normal;
   height: 15px;

@@ -5,7 +5,7 @@ const initialState = {
 
 export default function(state = initialState, action) {
   if (action.type === "ADD_HERO") {
-    const { id, content } = action.payload;
+    const { content } = action.payload;
     // content.counter = 1;
     if (state.allIds.indexOf(content.name) === -1) {
       return {
@@ -30,7 +30,6 @@ export default function(state = initialState, action) {
       [content.name]: { ...state.byIds[content.name], isPressed: true }
     });
     return {
-      //
       allIds: state.allIds,
       byIds: copy
     };
@@ -49,18 +48,9 @@ export default function(state = initialState, action) {
       [content.name]: { ...state.byIds[content.name], isPressed: false }
     });
     return {
-      //
       allIds: state.allIds,
       byIds: copy
     };
-    // return {
-    //   //
-    //   allIds: state.allIds,
-    //   byIds: {
-    //     ...state.byIds,
-    //     [content.name]: { ...state.byIds[content.name], isPressed: true }
-    //   }
-    // };
   } else if (action.type === "HERO_DELETE") {
     const { content } = action.payload;
     const { allIds, byIds } = state;

@@ -10,16 +10,15 @@ import {
   deleteHero
 } from "../../redux/actions";
 
-import uniqueId from "lodash/uniqueId";
-
 class HeaderAddedHeroes extends React.Component {
   state = {
     heroes: {
       allIds: [],
       byIds: {}
     },
-    showCloseButton: false,
-    justTouchedFlag: false
+    justTouchedFlag: false,
+    MouseOverFlag: false,
+    screenWidth: window.screen.width > 767 ? true : false,
   };
   constructor(props) {
     super(props);
@@ -29,14 +28,11 @@ class HeaderAddedHeroes extends React.Component {
     this.handleMove = this.handleMove.bind(this);
     this.handleMouseOut = this.handleMouseOut.bind(this);
     this.handleMouseOver = this.handleMouseOver.bind(this);
+    this.handleMouseOverCB = this.handleMouseOverCB.bind(this);
+    this.handleMouseOutCB = this.handleMouseOutCB.bind(this);
 
     store.subscribe(() => {
-      let header = document.querySelector(".header-added-heroes");
       const headerText = document.querySelector(".header-added-heroes__call-to-action-text");
-      const marvelIcon = document.querySelector(".footer-universe-selecting__marvel-universe");
-      const dcIcon = document.querySelector(".footer-universe-selecting__dc-universe");
-      const listField = document.querySelector(".find-hero-list");
-      const list = document.querySelector(".find-hero-list__list");
       if( getComputedStyle(headerText).display === 'block' && store.getState().addedHeroes.allIds.length) {
         headerText.style.display = 'none';
       } else if (!store.getState().addedHeroes.allIds.length) {
@@ -50,7 +46,7 @@ class HeaderAddedHeroes extends React.Component {
   }
 
   handleMove(el) {
-    this.setState({ justTouchedFlag: false, showCloseButton: false });
+    this.setState({ justTouchedFlag: false });
     this.props.heroPressedFalse(el);
   }
   onTouchStart() {
@@ -58,20 +54,29 @@ class HeaderAddedHeroes extends React.Component {
   }
   onTouchEnd(el) {
     if (this.state.justTouchedFlag) {
-      this.setState({ showCloseButton: true });
       this.props.heroPressedTrue(el);
     } else {
-      this.setState({ showCloseButton: false });
       this.props.heroPressedFalse(el);
     }
   }
   handleMouseOut(el) {
-    this.setState({ showCloseButton: false });
-    this.props.heroPressedFalse(el);
+    setTimeout( () => {
+      if (this.state.MouseOverFlag) {
+        this.props.heroPressedFalse(el);
+      }
+    }, 0)
   }
   handleMouseOver(el) {
-    this.setState({ showCloseButton: true });
+    this.setState({
+      MouseOverFlag: true
+    });
     this.props.heroPressedTrue(el);
+  }
+  handleMouseOverCB() {
+    this.setState({ MouseOverFlag: false});
+  }
+  handleMouseOutCB(el) {
+    this.props.heroPressedFalse(el);
   }
   render() {
     return (
@@ -85,6 +90,44 @@ class HeaderAddedHeroes extends React.Component {
             return (
               <a name={el.name} key={el.name} className="heroes__link">
                 <div className="hero">
+                { console.log((isPressed || window.screen.width > 767 ), window.screen.width)}
+                { (isPressed) && (
+                  <div className="delete-button" style={{display: "block",
+                  position: "absolute",
+                  right: "0px",
+                  lineHeight: "normal",
+                  height: "15px"}}
+                    id="delete"
+                    onMouseOver={this.handleMouseOverCB}
+                    onMouseOut={this.handleMouseOutCB.bind(this, el)}
+                    onTouchEnd={this.props.deleteHero.bind(this, el)}
+                    onClick={this.props.deleteHero.bind(this, el)}
+                  >
+                    <img
+                      src={DeleteIcon}
+                      width="8px"
+                      height="8px"
+                      style={{
+                        position: "absolute",
+                        right: "4px",
+                        bottom: "7px",
+                        zIndex: "1"
+                      }}
+                      alt=""
+                    />
+                    <img
+                      onTouchEnd={() => deleteHero(el)}
+                      src={EllipseDelete}
+                      alt=""
+                      width="24"
+                      style={{
+                        position: "relative",
+                        left: "4px",
+                        bottom: "8px"
+                      }}
+                    />
+                  </div>
+                )}
                   {
                     <img
                       className="hero__image"
@@ -119,36 +162,7 @@ class HeaderAddedHeroes extends React.Component {
                       )}
                     </React.Fragment>
                   )}
-                  {isPressed && (
-                    <div
-                      id="delete"
-                      onTouchEnd={this.props.deleteHero.bind(this, el)}
-                    >
-                      <img
-                        src={DeleteIcon}
-                        width="8px"
-                        height="8px"
-                        style={{
-                          position: "absolute",
-                          right: "4px",
-                          bottom: "7px",
-                          zIndex: "1"
-                        }}
-                        alt=""
-                      />
-                      <img
-                        onTouchEnd={() => deleteHero(el)}
-                        src={EllipseDelete}
-                        alt=""
-                        width="24"
-                        style={{
-                          position: "relative",
-                          left: "4px",
-                          bottom: "8px"
-                        }}
-                      />
-                    </div>
-                  )}
+
                 </div>
               </a>
             );

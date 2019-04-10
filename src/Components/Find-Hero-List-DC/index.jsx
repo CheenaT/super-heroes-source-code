@@ -30,7 +30,6 @@ const FindHeroListDC = ({ heroes, addHero }) => {
 };
 
 const mapStateToProps = state => {
-  const { currentUniverse } = state;
   const heroes = getHeroesDC(state);
   return { heroes };
 }

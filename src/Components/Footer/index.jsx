@@ -11,6 +11,7 @@ const Footer = ({ currentUniverse, setUniverse }) => {
         <NavLink to="/dc">
           <DCLogo
             className="footer-universe-selecting__dc-universe"
+            onClick={() => {setUniverse('dc')}}
             onTouchStart={() => {setUniverse('dc')}} alt="DC icon" />
         </NavLink>{" "}
         {/* replace to img tag */}
@@ -19,6 +20,7 @@ const Footer = ({ currentUniverse, setUniverse }) => {
             className="footer-universe-selecting__marvel-universe"
             src={MarvelIcon}
             alt="Marvel icon"
+            onClick={() => {setUniverse('marvel')}}
             onTouchStart={() => {setUniverse('marvel')}}
           />
         </NavLink>

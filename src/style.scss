@@ -39,6 +39,25 @@ a:hover, a:visited, a:link, a:active {
 }
 .main {
   position: relative;
+  background: -webkit-gradient(
+    linear,
+    left top, left bottom,
+    color-stop(13.26%, #31333b),
+    color-stop(74.59%, #363945),
+    to(#2b2d35)
+  );
+  background: -webkit-linear-gradient(
+    top,
+    #31333b 13.26%,
+    #363945 74.59%,
+    #2b2d35 100%
+  );
+  background: -o-linear-gradient(
+    top,
+    #31333b 13.26%,
+    #363945 74.59%,
+    #2b2d35 100%
+  );
   background: linear-gradient(
     180deg,
     #31333b 13.26%,
@@ -66,6 +85,12 @@ a:hover, a:visited, a:link, a:active {
 .header-added-heroes {
   display: block;
   position: relative;
+  background: -webkit-gradient(linear, left bottom, left top, from(rgba(0, 0, 0, 0.3)), to(rgba(0, 0, 0, 0.3))),
+    -webkit-gradient(linear, left top, left bottom, color-stop(-51.19%, #555761), to(#2b2d35));
+  background: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    -webkit-linear-gradient(top, #555761 -51.19%, #2b2d35 100%);
+  background: -o-linear-gradient(bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    -o-linear-gradient(top, #555761 -51.19%, #2b2d35 100%);
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
     linear-gradient(180deg, #555761 -51.19%, #2b2d35 100%);
   height: 168px;
@@ -92,6 +117,8 @@ a:hover, a:visited, a:link, a:active {
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   // width: 375px;
+  // cursor: pointer;
+  // -webkit-transform: translate3d(0,0,0);
 }
 .hero {
   position: relative;
@@ -102,7 +129,7 @@ a:hover, a:visited, a:link, a:active {
   text-align: center;
   background: #ddd;
   border-radius: 8px;
-
+  -webkit-transform: translate3d(0,0,0);
 }
 .hero-name {
   // position: absolute;
@@ -129,7 +156,9 @@ div.hero:hover span:first-child{
   height: 20px;
   background: cyan;
 }
-
+#last_div {
+  // -webkit-transform: translate3d(0,0,0);
+}
 #delete {
   display: none;
   position: absolute;
@@ -139,6 +168,12 @@ div.hero:hover span:first-child{
 }
 .hero + .hero {
   margin-left: 16px;
+}
+.hero__image {
+  // -webkit-transform: translate3d(0,0,0);
+}
+.heroes__link {
+  // -webkit-transform: translate3d(0,0,0);
 }
 .heroes__link + .heroes__link {
   margin-left: 16px;
@@ -180,6 +215,7 @@ div.hero:hover span:first-child{
   height: 144px;
   top: 24px;
   z-index: 1;
+  // -webkit-transform: translate3d(0,0,0);
   @media screen and (max-width: 1600px) {
     left: 1554px;
   }
@@ -190,11 +226,15 @@ div.hero:hover span:first-child{
     left: 330px;
   }
   @media screen and (max-width: 320px) {
-    left: 282px; // why not right: 0px; ?
+    left: 282px;
   }
+  background: -webkit-gradient(linear, right top, left top, color-stop(50%, #282930), to(rgba(40, 41, 48, 0)));
+  background: -webkit-linear-gradient(right, #282930 50%, rgba(40, 41, 48, 0) 100%);
+  background: -o-linear-gradient(right, #282930 50%, rgba(40, 41, 48, 0) 100%);
   background: linear-gradient(270deg, #282930 50%, rgba(40, 41, 48, 0) 100%);
 }
 .header-added-heroes__call-to-action-text {
+  // -webkit-transform: translate3d(0,0,0);
   position: absolute;
   // left: 316px; // def
   // width: 136px;
@@ -222,8 +262,6 @@ div.hero:hover span:first-child{
 }
 .find-hero-list {
   position: relative;
-  // @media screen and (max-width: 767px) { // width: 767px;
-  // height: 404px; // }
   @media screen and (max-width: 767.2px) {
     width: 767px;
     height: 499px;
@@ -246,7 +284,8 @@ div.hero:hover span:first-child{
   grid-template-columns: repeat(auto-fit, minmax(72px, 72px));
   grid-auto-rows: 100px;
   grid-gap: 36px 8px;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   position: absolute;
   top: 100px;
   width: 320px;
@@ -302,7 +341,8 @@ div.hero:hover span:first-child{
 }
 .search-bar__input {
   position: absolute;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   border-width: 0px;
   // border: none;
   font-family: Roboto;
@@ -314,6 +354,15 @@ div.hero:hover span:first-child{
   height: 56px;
   top: 16px;
   padding-left: 14px;
+  &::-webkit-input-placeholder {
+    color: white;
+  }
+  &:-ms-input-placeholder {
+    color: white;
+  }
+  &::-ms-input-placeholder {
+    color: white;
+  }
   &::placeholder {
     color: white;
   }

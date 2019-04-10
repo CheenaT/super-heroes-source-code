@@ -30,7 +30,7 @@ export const heroPressedFalse = content => ({
   payload: { content }
 });
 
-export const deleteHero = content => ({
+export const deleteHero = (event, content) => ({
   type: "HERO_DELETE",
-  payload: { content }
+  payload: { event, content }
 });

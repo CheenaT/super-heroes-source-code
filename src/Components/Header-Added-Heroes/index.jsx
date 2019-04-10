@@ -30,6 +30,7 @@ class HeaderAddedHeroes extends React.Component {
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.handleMouseOverCB = this.handleMouseOverCB.bind(this);
     this.handleMouseOutCB = this.handleMouseOutCB.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
 
     store.subscribe(() => {
       const headerText = document.querySelector(
@@ -43,22 +44,48 @@ class HeaderAddedHeroes extends React.Component {
       } else if (!store.getState().addedHeroes.allIds.length) {
         headerText.style.display = "block";
       }
-
       this.setState({
         heroes: store.getState().addedHeroes
       });
     });
   }
-
+  componentDidMount() {
+    document.addEventListener('click', this.handleClickOutside);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('click', this.handleClickOutside);
+  }
+  handleClickOutside() {
+    if (store.getState().addedHeroes.allIds.length) {
+      const copy = Object.assign({}, this.state.heroes);
+      for( var i in copy.byIds) {
+        copy.byIds[i].isPressed = false;
+      }
+      this.setState({ heroes: copy})
+    }
+  }
   handleMove(el) {
-    this.setState({ justTouchedFlag: false });
+    const copy = Object.assign({}, this.state.heroes);
+    for( var i in copy.byIds) {
+      copy.byIds[i].isPressed = false
+    }
+    this.setState({ justTouchedFlag: false, heroes: copy });
     this.props.heroPressedFalse(el);
   }
   onTouchStart() {
     this.setState({ justTouchedFlag: true });
   }
   onTouchEnd(event, el) {
-    event.preventDefault();
+    if (event.cancelable) {
+       event.preventDefault();
+    }
+    const copy = Object.assign({}, this.state.heroes);
+    for( var i in copy.byIds) {
+      // if ( copy.byIds[i].name !== el.name ) {
+        copy.byIds[i].isPressed = false;
+      // }
+    }
+    this.setState({ heroes: copy}) // почему-то работает без него о_О
     if (this.state.justTouchedFlag) {
       this.props.heroPressedTrue(el);
     } else {
@@ -86,8 +113,8 @@ class HeaderAddedHeroes extends React.Component {
   }
   render() {
     return (
-      <header className="header-added-heroes">
-        <div className="heroes">
+      <header className="header-added-heroes"> {console.log(this.state.heroes['byIds'])}
+        <div className="heroes"> {/* onClick="void(0);" */}
           <div className="shadow-last-scroll-hero" />{" "}
           {Object.keys(this.state.heroes["byIds"]).map(key => {
             const el = this.state.heroes["byIds"][key].content;
@@ -103,14 +130,16 @@ class HeaderAddedHeroes extends React.Component {
                       position: "absolute",
                       right: "0px",
                       lineHeight: "normal",
-                      height: "15px"
+                      height: "15px",
+                      zIndex: "2"
                     }}
                     id="delete"
                     onMouseOver={this.handleMouseOverCB}
                     onMouseOut={this.handleMouseOutCB.bind(this, el)}
-                    onTouchEnd={this.props.deleteHero.bind(this, el)}
-                    onClick={this.props.deleteHero.bind(this, el)}
+                    onTouchEnd={(e) => {this.props.deleteHero(e, el)}}
+                    onClick={(e) => {this.props.deleteHero(e, el)}}
                   >
+                  {/* onClick={this.props.deleteHero.bind(this, el)} */}
                     <img
                       src={DeleteIcon}
                       width="8px"

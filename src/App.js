@@ -12,7 +12,16 @@ class App extends Component {
     setTimeout(() => document.body.style.removeProperty("zoom"), 400); // почему-то начал устанавливатья zoom = '0.9' у body после загрузки
     var link = document.querySelector("link[rel*='icon']");
     link.href =
-      "/favicons/" + Math.floor(Math.random() * 10 + 1) + "favicon.ico";
+      "favicons/" + Math.floor(Math.random() * 10 + 1) + "favicon.ico";
+    if ('ontouchstart' in document.documentElement) {
+      console.log(' touch device');
+    }
+    // var isTouch = true; // пишет false после клика на экране в мобильном эмуляторе
+    // window.addEventListener('mousemove', function mouseMoveDetector() {
+    //   isTouch = false;
+    //   console.log(' isTouch : ', isTouch);
+    //   window.removeEventListener('mousemoe', mouseMoveDetector);
+    // });
   }
   render() {
     return (

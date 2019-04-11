@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/super-heroes-gazprombank-staging/precache-manifest.2d60be98558b56c514db7358e36e9eed.js"
+  "/super-heroes-gazprombank-staging/precache-manifest.e6b0c533c0582ee615dfd8a935c91384.js"
 );
 
 workbox.clientsClaim();

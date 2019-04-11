@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/super-heroes-gazprombank-staging/precache-manifest.e6b0c533c0582ee615dfd8a935c91384.js"
+  "/super-heroes-source-code/precache-manifest.93da4aea23b96860fe8c6f1d1d0d6bcd.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/super-heroes-gazprombank-staging/index.html", {
+workbox.routing.registerNavigationRoute("/super-heroes-source-code/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });

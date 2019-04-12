@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "eb285f30e091256720ef",
-    "url": "/super-heroes-source-code/static/css/main.f1e07cdf.chunk.css"
+    "revision": "1e0a9b852858c63acc1d",
+    "url": "/super-heroes-source-code/static/css/main.00ffec46.chunk.css"
   },
   {
-    "revision": "eb285f30e091256720ef",
-    "url": "/super-heroes-source-code/static/js/main.cbc28544.chunk.js"
+    "revision": "1e0a9b852858c63acc1d",
+    "url": "/super-heroes-source-code/static/js/main.2a26183a.chunk.js"
   },
   {
     "revision": "4c615f5d588b36af122b",
@@ -44,7 +44,7 @@ self.__precacheManifest = [
     "url": "/super-heroes-source-code/static/media/Rectangle.5591022b.svg"
   },
   {
-    "revision": "a0dd4f61a42652fbec7c552de3920006",
+    "revision": "2f1efdb791c2f2179c077c70e228136a",
     "url": "/super-heroes-source-code/index.html"
   }
 ];

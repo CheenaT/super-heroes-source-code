@@ -93,7 +93,7 @@ class HeaderAddedHeroes extends React.Component {
     }
   }
   handleMouseOut(el) {
-    setTimeout(() => {
+    setTimeout(() => { // если убрать setTimeout то происходит зацикливание появления и исчезновения кнопки удаления героя
       if (this.state.MouseOverFlag || this.state.justTouchedFlag) {
         this.props.heroPressedFalse(el);
       }
@@ -135,11 +135,10 @@ class HeaderAddedHeroes extends React.Component {
                     }}
                     id="delete"
                     onMouseOver={this.handleMouseOverCB}
-                    onMouseOut={this.handleMouseOutCB.bind(this, el)}
+                    onMouseOut={(e) => {this.handleMouseOutCB(el)}}
                     onTouchEnd={(e) => {this.props.deleteHero(e, el)}}
                     onClick={(e) => {this.props.deleteHero(e, el)}}
                   >
-                  {/* onClick={this.props.deleteHero.bind(this, el)} */}
                     <img
                       src={DeleteIcon}
                       width="8px"
@@ -167,11 +166,11 @@ class HeaderAddedHeroes extends React.Component {
                   {
                     <img
                       className="hero__image"
-                      onTouchStart={this.onTouchStart.bind(this, el)}
-                      onTouchMove={this.handleMove.bind(this, el)}
+                      onTouchStart={(e) => {this.onTouchStart(el)}}
+                      onTouchMove={(e) => {this.handleMove(el)}}
                       onTouchEnd={(e) => {this.onTouchEnd(e, el)}}
-                      onMouseOver={this.handleMouseOver.bind(this, el)}
-                      onMouseOut={this.handleMouseOut.bind(this, el)}
+                      onMouseOver={(e) => {this.handleMouseOver(el)}}
+                      onMouseOut={(e) => {this.handleMouseOut(el)}}
                       src={el.image}
                       alt=""
                       style={{
@@ -203,7 +202,6 @@ class HeaderAddedHeroes extends React.Component {
             );
           })}{" "}
           <div
-            id="last_div"
             style={{ width: "38px", display: "inline-block" }}
           />{" "}
           {/* for extra space when scrolling to the last hero */}

@@ -21,8 +21,8 @@ export default function(state = initialState, action) {
           }
         }
       };
-    } else if (state.byIds[content.name].counter < 15) {
-      console.log(" state : ", state.byIds[content.name].counter++); // изменяет счётчик
+    } else if (state.byIds[content.name].counter < 15) { // сделал лимит добавление одного героя до 15
+        state.byIds[content.name].counter++;
     }
   } else if (action.type === "HERO_PRESSED_TRUE") {
     const { content } = action.payload;
@@ -40,14 +40,6 @@ export default function(state = initialState, action) {
       allIds: state.allIds,
       byIds: state.byIds
     };
-    // return { // этот вариант тоже работал, но с телефона на github pages неправильно (менял местами выбранных героев после нажатия на всех кроме последнего выбранного героя)
-    //   //
-    //   ...state,
-    //   byIds: {
-    //     ...state.byIds,
-    //     [content.name]: { ...state.byIds[content.name], isPressed: true }
-    //   }
-    // };
   } else if (action.type === "HERO_PRESSED_FALSE") {
     const { content } = action.payload;
     const { allIds, byIds } = state;
@@ -75,8 +67,8 @@ export default function(state = initialState, action) {
         ...state
       };
     }
-    var ids = allIds.filter(el => el !== content.name);
-    var heroes = Object.keys(byIds)
+    let ids = allIds.filter(el => el !== content.name);
+    let heroes = Object.keys(byIds)
       .filter(key => key !== content.name)
       .reduce((result, current) => {
         result[current] = byIds[current];

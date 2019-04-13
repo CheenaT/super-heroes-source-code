@@ -13,6 +13,7 @@ class App extends Component {
     var link = document.querySelector("link[rel*='icon']");
     link.href =
       "favicons/" + Math.floor(Math.random() * 10 + 1) + "favicon.ico";
+    // check is touch device
     if ('ontouchstart' in document.documentElement) {
       console.log(' touch device');
     }

@@ -166,15 +166,6 @@ div.hero:hover span:first-child{
 .hero + .hero {
   margin-left: 16px;
 }
-.hero__image {
-  // -webkit-transform: translate3d(0,0,0);
-}
-.heroes__link {
-  // -webkit-transform: translate3d(0,0,0);
-}
-.heroes__link + .heroes__link {
-  margin-left: 16px;
-}
 .hero__counter-icon {
   position: absolute;
   left: 4px;

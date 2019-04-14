@@ -120,8 +120,7 @@ class HeaderAddedHeroes extends React.Component {
             const el = this.state.heroes["byIds"][key].content;
             const { counter, isPressed } = this.state.heroes["byIds"][key];
             return (
-              <a name={el.name} key={el.name} className="heroes__link">
-                <div className="hero">
+                <div key={el.name} className="hero">
                 {isPressed && (
                   <div
                     className="delete-button"
@@ -198,7 +197,6 @@ class HeaderAddedHeroes extends React.Component {
                     </React.Fragment>
                   )}
                 </div>
-              </a>
             );
           })}{" "}
           <div

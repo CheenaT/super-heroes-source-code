@@ -13,8 +13,7 @@ const FindHeroListMarvel = ({ heroes, addHero }) => {
       </div>
       <div className="find-hero-list__list">
         {heroes.map(hero => (
-          <a href={"#" + hero.name} key={uniqueId()}>
-            <div className="hero-card" onClick={() => addHero(hero)}>
+            <div key={uniqueId()} className="hero-card" onClick={() => addHero(hero)}>
               {
                 <img
                   src={hero.image}
@@ -31,7 +30,6 @@ const FindHeroListMarvel = ({ heroes, addHero }) => {
                 <div className="hero-name">{hero.name}</div>
               }
             </div>
-          </a>
         ))}
       </div>
     </div>

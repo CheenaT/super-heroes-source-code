@@ -1,3 +1,5 @@
+var scrollIntoView = require('scroll-into-view');
+
 const initialState = {
   allIds: [],
   byIds: {}
@@ -7,8 +9,12 @@ let isClick = false;
 
 export default function(state = initialState, action) {
   if (action.type === "ADD_HERO") {
-    const { content } = action.payload;
+    const { content } = action.payload,
+            heroIndex = state.allIds.indexOf(content.name);
     if (state.allIds.indexOf(content.name) === -1) {
+      setTimeout( function() { // сделать переход на героя после того как он добавится в DOM елси он не поместился на экране (героя добавленного первый раз)
+        scrollIntoView(document.querySelectorAll(".hero")[state.allIds.length]);
+      }, 0);
       return {
         ...state,
         allIds: [...state.allIds, content.name],
@@ -21,13 +27,15 @@ export default function(state = initialState, action) {
           }
         }
       };
-    } else if (state.byIds[content.name].counter < 15) { // сделал лимит добавление одного героя до 15
-        state.byIds[content.name].counter++;
+    } else if (state.byIds[content.name].counter < 15) {
+      // сделал лимит добавление одного героя до 15
+      scrollIntoView(document.querySelectorAll(".hero")[heroIndex]);
+      state.byIds[content.name].counter++;
     }
   } else if (action.type === "HERO_PRESSED_TRUE") {
     const { content } = action.payload;
     const { allIds, byIds } = state;
-    if ( allIds.length ) {
+    if (allIds.length) {
       const copy = Object.assign({}, byIds, {
         [content.name]: { ...state.byIds[content.name], isPressed: true }
       });
@@ -43,7 +51,7 @@ export default function(state = initialState, action) {
   } else if (action.type === "HERO_PRESSED_FALSE") {
     const { content } = action.payload;
     const { allIds, byIds } = state;
-    if ( allIds.length ) {
+    if (allIds.length) {
       const copy = Object.assign({}, byIds, {
         [content.name]: { ...state.byIds[content.name], isPressed: false }
       });
@@ -59,7 +67,7 @@ export default function(state = initialState, action) {
   } else if (action.type === "HERO_DELETE") {
     const { event, content } = action.payload;
     const { allIds, byIds } = state;
-    if (event.type === 'click') {
+    if (event.type === "click") {
       isClick = true;
     } else {
       isClick = false;

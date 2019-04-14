@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "3c2e5b7436bc4c113ab9",
+    "revision": "1a4ff72feda587f80dc7",
     "url": "/super-heroes-source-code/static/css/main.869d2b4f.chunk.css"
   },
   {
-    "revision": "3c2e5b7436bc4c113ab9",
-    "url": "/super-heroes-source-code/static/js/main.78e54429.chunk.js"
+    "revision": "1a4ff72feda587f80dc7",
+    "url": "/super-heroes-source-code/static/js/main.3b134850.chunk.js"
   },
   {
     "revision": "4c615f5d588b36af122b",
     "url": "/super-heroes-source-code/static/js/runtime~main.41c89137.js"
   },
   {
-    "revision": "2e4f48fe2095db3a3b33",
-    "url": "/super-heroes-source-code/static/js/2.f5ccce2e.chunk.js"
+    "revision": "3b92906e9f62f9efc1e2",
+    "url": "/super-heroes-source-code/static/js/2.82f6f572.chunk.js"
   },
   {
     "revision": "0c80cdb8a5ba26c6ac2d61d9e64d0ef3",
@@ -44,7 +44,7 @@ self.__precacheManifest = [
     "url": "/super-heroes-source-code/static/media/Rectangle.5591022b.svg"
   },
   {
-    "revision": "f36e0a27c8cb9341140df26908c80265",
+    "revision": "f4ce5730c9372088a440555a63516696",
     "url": "/super-heroes-source-code/index.html"
   }
 ];

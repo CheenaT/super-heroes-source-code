@@ -17,8 +17,7 @@ class HeaderAddedHeroes extends React.Component {
       byIds: {}
     },
     justTouchedFlag: false,
-    MouseOverFlag: false,
-    screenWidth: window.screen.width > 767 ? true : false
+    MouseOverFlag: false
   };
   constructor(props) {
     super(props);
@@ -32,18 +31,7 @@ class HeaderAddedHeroes extends React.Component {
     this.handleMouseOutCB = this.handleMouseOutCB.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
 
-    store.subscribe(() => {
-      const headerText = document.querySelector(
-        ".header-added-heroes__call-to-action-text"
-      );
-      if (
-        getComputedStyle(headerText).display === "block" &&
-        store.getState().addedHeroes.allIds.length
-      ) {
-        headerText.style.display = "none";
-      } else if (!store.getState().addedHeroes.allIds.length) {
-        headerText.style.display = "block";
-      }
+    store.subscribe(() => { // решил попробовать subscribe
       this.setState({
         heroes: store.getState().addedHeroes
       });
@@ -113,8 +101,8 @@ class HeaderAddedHeroes extends React.Component {
   }
   render() {
     return (
-      <header className="header-added-heroes"> {console.log(this.state.heroes['byIds'])}
-        <div className="heroes"> {/* onClick="void(0);" */}
+      <header className="header-added-heroes">
+        <div className="heroes">
           <div className="shadow-last-scroll-hero" />{" "}
           {Object.keys(this.state.heroes["byIds"]).map(key => {
             const el = this.state.heroes["byIds"][key].content;
@@ -190,7 +178,6 @@ class HeaderAddedHeroes extends React.Component {
                       {counter >= 10 && (
                         <div className="counter-text2">{counter}</div>
                       )}{" "}
-                      {/* TODO // OPTIMIZE: */}
                       {counter < 10 && (
                         <div className="counter-text">{counter}</div>
                       )}
@@ -203,11 +190,11 @@ class HeaderAddedHeroes extends React.Component {
             style={{ width: "38px", display: "inline-block" }}
           />{" "}
           {/* for extra space when scrolling to the last hero */}
-          {/* <div className="hero" ref={this.props.focusEl}></div> */}
         </div>
-        <div className="header-added-heroes__call-to-action-text">
-          Выберите героя
-        </div>
+        { this.state.heroes.allIds.length === 0 &&
+          <div className="header-added-heroes__call-to-action-text">
+            Выберите героя
+          </div> }
       </header>
     );
   }

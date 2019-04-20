@@ -67,7 +67,7 @@ export default function(state = initialState, action) {
   } else if (action.type === "HERO_DELETE") {
     const { event, content } = action.payload;
     const { allIds, byIds } = state;
-    if (event.type === "click") {
+    if (event.type === "click") { // чтобы удаление не сработывало дважды и обрабатывалось на тач устройствах и на десктопе
       isClick = true;
     } else {
       isClick = false;

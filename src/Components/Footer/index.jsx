@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactComponent as DCLogo } from "../../images/dc-logo.svg"; // ReactComponent cause this error: "The above error occurred in the </static/media/dc-logo.b0667703.svg> component"
+// import { ReactComponent as DCLogo } from "../../images/dc-logo.svg"; // ReactComponent cause this error: "The above error occurred in the </static/media/dc-logo.b0667703.svg> component"
 import MarvelIcon from "../../images/Marvel.svg"; // Error log in folder error logs
 import DCIcon from "../../images/dc-logo.svg";
 import { connect } from 'react-redux';
